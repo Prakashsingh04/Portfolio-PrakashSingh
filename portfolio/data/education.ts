@@ -1,0 +1,50 @@
+import { Education } from "@/types/portfolio";
+
+/** Most recent first — the timeline renders in this order. */
+export const education: Education[] = [
+    {
+        id: "vit",
+        institution: "Vellore Institute of Technology (VIT), Vellore",
+        degree: "Master of Computer Applications (MCA)",
+        level: "Postgraduate",
+        period: "2024 — 2026",
+        location: "Vellore, Tamil Nadu, India",
+        score: "8.14",
+        scoreLabel: "CGPA",
+        scoreMax: 10,
+    },
+    {
+        id: "ashoka",
+        institution: "Ashoka Center for Business & Computer Studies",
+        degree: "Bachelor of Science in Computer Science",
+        level: "Undergraduate",
+        period: "2020 — 2023",
+        location: "Nashik, Maharashtra, India",
+        score: "8.90",
+        scoreLabel: "CGPA",
+        scoreMax: 10,
+    },
+    {
+        id: "hpt",
+        institution: "HPT Arts and Science College",
+        degree: "Higher Secondary Certificate (Class XII)",
+        level: "Class XII",
+        stream: "PCM — Physics, Chemistry, Maths",
+        period: "2020",
+        location: "Nashik, Maharashtra, India",
+        score: "73.38",
+        scoreLabel: "Percentage",
+        scoreMax: 100,
+    },
+    {
+        id: "aps-devlali",
+        institution: "Army Public School, Devlali",
+        degree: "Secondary School Certificate (Class X)",
+        level: "Schooling",
+        period: "2018",
+        location: "Devlali, Nashik, Maharashtra, India",
+        score: "78.60",
+        scoreLabel: "Percentage",
+        scoreMax: 100,
+    },
+];
