@@ -11,7 +11,7 @@ export const profile: Profile = {
     bio: "",
     location: "Pune, India",
     email: "imprakash.work04@gmail.com",
-    resumeUrl: "/resume/PrakashSingh_Resume.pdf",
+    resumeUrl: "/resume/PrakashSingh-SDE.pdf",
     socials: [
         {
             name: "LinkedIn",
