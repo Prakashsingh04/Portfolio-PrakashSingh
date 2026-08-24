@@ -4,11 +4,11 @@ export const profile: Profile = {
     name: "Prakash Singh",
     greeting: "Hi, I'm",
     tagline: "AI Engineering · Software Development · Generative AI",
-    eyebrow: "AI ENGINEERING · SOFTWARE DEVELOPMENT · GENERATIVE AI",
-    headline: "Building practical AI systems,\none workflow at a time.",
+    eyebrow: "AI ENGINEERING · SOFTWARE DEVELOPMENT · 24M",
+    headline: "Building AI applications, backend services, and real-time systems.",
     description:
         "Software Development Engineer with hands-on experience in enterprise AI, backend APIs, real-time AI workflows and developer-focused applications.",
-    bio: "My work spans backend APIs and full-stack applications through to enterprise AI workflows, real-time voice interfaces and semantic search systems. I enjoy understanding how systems work, finding the gaps, and turning ambiguous problems into something that runs.",
+    bio: "",
     location: "Pune, India",
     email: "imprakash.work04@gmail.com",
     resumeUrl: "/resume/PrakashSingh_Resume.pdf",
@@ -27,6 +27,11 @@ export const profile: Profile = {
             name: "Email",
             url: "mailto:imprakash.work04@gmail.com",
             icon: "mail",
+        },
+        {
+            name: "Medium",
+            url: "https://medium.com/@imprakash.work04",
+            icon: "medium",
         },
     ],
 };

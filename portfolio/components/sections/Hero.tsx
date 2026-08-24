@@ -14,8 +14,6 @@ import {
 import { profile } from "@/data/profile";
 import { experiences } from "@/data/experience";
 import { education } from "@/data/education";
-import { projects } from "@/data/projects";
-import { certifications } from "@/data/certificates";
 import {
     textReveal,
     staggerContainer,
@@ -26,6 +24,21 @@ import { useNavigate } from "@/lib/navigation-context";
 
 const current = experiences[0];
 const mca = education[0];
+
+/** lucide-react has no Medium glyph, so this ships as a plain inline SVG. */
+function MediumIcon({ size = 16 }: { size?: number }) {
+    return (
+        <svg
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+        >
+            <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42zM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+        </svg>
+    );
+}
 
 /** The old About section, folded in as icon rows instead of prose. */
 const facts = [
@@ -58,21 +71,6 @@ const facts = [
         label: "Interests",
         value: "AI · Software · Animation · Anime",
         meta: "Badminton on the side",
-    },
-];
-
-const stats = [
-    { value: "76+", label: "Enterprise tools", meta: "integrated over MCP" },
-    {
-        value: String(projects.length),
-        label: "Projects built",
-        meta: "AI · full-stack · ML",
-    },
-    { value: mca.score, label: "MCA CGPA", meta: "VIT Vellore" },
-    {
-        value: String(certifications.length),
-        label: "Certifications",
-        meta: "all verifiable",
     },
 ];
 
@@ -181,6 +179,15 @@ export default function Hero() {
                                 <Linkedin size={16} />
                                 LinkedIn
                             </a>
+                            <a
+                                href={profile.socials[3].url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--border)] text-text-secondary text-sm font-medium rounded-lg hover:border-[var(--border-hover)] hover:text-text-primary transition-all duration-200"
+                            >
+                                <MediumIcon size={16} />
+                                Medium
+                            </a>
                         </motion.div>
                     </div>
 
@@ -225,31 +232,6 @@ export default function Hero() {
                             ))}
                         </ul>
                     </motion.aside>
-                </motion.div>
-
-                {/* Stat tiles */}
-                <motion.div
-                    variants={staggerContainer}
-                    initial="hidden"
-                    animate="visible"
-                    className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-12"
-                >
-                    {stats.map((stat) => (
-                        <motion.div
-                            key={stat.label}
-                            variants={staggerItem}
-                            className="p-5 rounded-xl border border-[var(--border)] bg-surface/80 backdrop-blur-sm hover:border-[var(--border-hover)] transition-colors duration-200"
-                        >
-                            <span className="block w-7 h-px bg-accent opacity-70 mb-4" />
-                            <p className="font-display text-3xl md:text-4xl font-semibold text-text-primary leading-none">
-                                {stat.value}
-                            </p>
-                            <p className="text-sm text-text-secondary mt-2.5">{stat.label}</p>
-                            <p className="font-mono text-[11px] text-text-tertiary mt-1">
-                                {stat.meta}
-                            </p>
-                        </motion.div>
-                    ))}
                 </motion.div>
             </div>
         </section>

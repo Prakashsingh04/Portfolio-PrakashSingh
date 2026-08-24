@@ -58,24 +58,21 @@ export default function Certificates() {
     return (
         <section id="certificates" className="py-24 px-6">
             <div className="max-w-6xl mx-auto">
-                <SectionHeading
-                    code="CRT"
-                    title="Certificates & Achievements"
-                    subtitle="The numbers behind the work, and every credential linked for verification."
-                />
+                <SectionHeading code="CRT" title="Certificates & Achievements" />
 
-                {/* Impact band */}
-                <motion.div
-                    variants={staggerContainer}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-14"
-                >
-                    {impactStats.map((stat) => (
-                        <StatTile key={stat.label} stat={stat} />
-                    ))}
-                </motion.div>
+                {impactStats.length > 0 && (
+                    <motion.div
+                        variants={staggerContainer}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }}
+                        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-14"
+                    >
+                        {impactStats.map((stat) => (
+                            <StatTile key={stat.label} stat={stat} />
+                        ))}
+                    </motion.div>
+                )}
 
                 {/* Credential ledger */}
                 <motion.div
