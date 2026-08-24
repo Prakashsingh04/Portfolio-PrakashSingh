@@ -1,5 +1,5 @@
-import Experience from "@/components/sections/Experience";
+import AppShell from "@/components/layout/AppShell";
 
 export default function Home() {
-  return <main className="md:pl-28"><Experience /></main>;
+  return <AppShell />;
 }
