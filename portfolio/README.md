@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hi, this is my portfolio 
 
-## Getting Started
+This is the code behind my personal portfolio site — built to actually show what I've worked on. It's a single-page app with smooth section-to-section navigation (home, experience, projects, skills, education, certificates, beyond code, and contact), all crossfading into each other.
 
-First, run the development server:
+I built this with Next.js + TypeScript + Tailwind, and leaned on Framer Motion for the transitions.
+
+## What's in here
+
+- **Home** — quick intro, who I am, what I do
+- **Experience** — where I've worked and what I actually did there
+- **Projects** — the stuff I'm proudest of
+- **Skills** — tools and tech I use regularly
+- **Education** — the academic path
+- **Certificates & Achievements** — courses, certifications, that kind of thing
+- **Beyond Code** — a bit of the non-work side of me
+- **Contact** — how to reach me
+
+Navigation is hash-based, so every section has its own shareable URL, and it remembers where you were if you refresh.
+
+## Tech stack
+
+- [Next.js 14](https://nextjs.org/) (App Router)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/) for the animations and page transitions
+- [Lucide](https://lucide.dev/) for icons
+
+## Running it locally
+
+If you want to poke around the code or run it yourself:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts, in case you need them:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build   # production build
+npm run start   # run the production build
+npm run lint    # lint the codebase
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/            entry point, layout, and global styles
+components/
+  layout/       shell, section nav, theme toggle, etc.
+  sections/     each individual section (Hero, Projects, Skills, ...)
+  ui/           small reusable UI bits
+data/           all my actual content — profile, projects, experience, skills, education, certs
+lib/            navigation context, animation variants, small utilities
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The content (my bio, project list, work experience, etc.) lives entirely in the `data/` folder as typed TypeScript files, so updating the site is mostly just editing data, not rewriting components.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Why I built it this way
 
-## Deploy on Vercel
+I wanted something that felt more like a small product than a static resume page — real transitions, a proper nav, and content kept separate from layout so I'm not touching component code every time I add a new project or certificate. It's also just been a fun place to try things out with Next.js and Framer Motion.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [LICENSE](../LICENSE).
+
+## Get in touch
+
+- LinkedIn: [linkedin.com/in/prakashsingh04](https://linkedin.com/in/prakashsingh04)
+- GitHub: [github.com/Prakashsingh04](https://github.com/Prakashsingh04)
+- Email: imprakash.work04@gmail.com
