@@ -9,17 +9,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        surface: "var(--surface)",
-        "surface-hover": "var(--surface-hover)",
-        "surface-active": "var(--surface-active)",
+        // Composed from channel vars so `/opacity` modifiers work. The plain
+        // --background / --accent hex vars still exist for arbitrary values
+        // like bg-[var(--nav-bg)] and shadow-[var(--accent-glow)].
+        background: "rgb(var(--background-rgb) / <alpha-value>)",
+        surface: "rgb(var(--surface-rgb) / <alpha-value>)",
+        "surface-hover": "rgb(var(--surface-hover-rgb) / <alpha-value>)",
+        "surface-active": "rgb(var(--surface-active-rgb) / <alpha-value>)",
         border: "var(--border)",
         "border-hover": "var(--border-hover)",
-        "text-primary": "var(--text-primary)",
-        "text-secondary": "var(--text-secondary)",
-        "text-tertiary": "var(--text-tertiary)",
-        accent: "var(--accent)",
+        "text-primary": "rgb(var(--text-primary-rgb) / <alpha-value>)",
+        "text-secondary": "rgb(var(--text-secondary-rgb) / <alpha-value>)",
+        "text-tertiary": "rgb(var(--text-tertiary-rgb) / <alpha-value>)",
+        accent: "rgb(var(--accent-rgb) / <alpha-value>)",
         "accent-muted": "var(--accent-muted)",
+        "accent-2": "rgb(var(--accent-2-rgb) / <alpha-value>)",
+        "accent-2-muted": "var(--accent-2-muted)",
+        "accent-2-border": "var(--accent-2-border)",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],

@@ -56,7 +56,7 @@ function StatTile({ stat }: { stat: ImpactStat }) {
 
 export default function Certificates() {
     return (
-        <section id="certificates" className="py-24 px-6">
+        <section id="certificates" className="pt-16 pb-24 px-6">
             <div className="max-w-6xl mx-auto">
                 <SectionHeading code="CRT" title="Certificates & Achievements" />
 

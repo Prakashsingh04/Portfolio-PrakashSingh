@@ -8,7 +8,7 @@ import { MapPin, Calendar } from "lucide-react";
 
 export default function Experience() {
     return (
-        <section id="experience" className="py-24 px-6">
+        <section id="experience" className="pt-16 pb-24 px-6">
             <div className="max-w-6xl mx-auto">
                 <SectionHeading
                     code="EXP"

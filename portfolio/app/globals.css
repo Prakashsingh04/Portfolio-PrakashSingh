@@ -15,14 +15,32 @@
   --text-primary: #edeff2;
   --text-secondary: #9ba1ac;
   --text-tertiary: #62676f;
+  /* Channel-only mirrors of the palette above. Tailwind composes these as
+     rgb(var(--x-rgb) / <alpha-value>) so opacity modifiers (bg-surface/70)
+     actually emit CSS — with a bare var() colour Tailwind drops them. */
+  --background-rgb: 11 12 15;
+  --surface-rgb: 20 21 25;
+  --surface-hover-rgb: 27 29 34;
+  --surface-active-rgb: 35 38 44;
+  --text-primary-rgb: 237 239 242;
+  --text-secondary-rgb: 155 161 172;
+  --text-tertiary-rgb: 98 103 111;
+  --accent-rgb: 198 241 53;
+  --accent-2-rgb: 242 166 90;
   --accent: #c6f135;
   --accent-hover: #d8ff5c;
   --accent-muted: rgba(198, 241, 53, 0.12);
   --accent-glow: rgba(198, 241, 53, 0.25);
+  /* Secondary accent — warm amber. Reserved for metadata badges so the lime
+     stays exclusive to identity + primary actions. */
+  --accent-2: #f2a65a;
+  --accent-2-muted: rgba(242, 166, 90, 0.1);
+  --accent-2-border: rgba(242, 166, 90, 0.26);
   --gradient-start: #c6f135;
   --gradient-end: #4ee1a0;
   --grid-line: rgba(237, 239, 242, 0.045);
   --nav-bg: rgba(20, 21, 25, 0.7);
+  --glass-edge: rgba(255, 255, 255, 0.14);
 }
 
 /* Light theme — cool paper background, deep olive accent */
@@ -36,14 +54,27 @@
   --text-primary: #14161a;
   --text-secondary: #4b5058;
   --text-tertiary: #868c93;
+  --background-rgb: 244 245 242;
+  --surface-rgb: 255 255 255;
+  --surface-hover-rgb: 237 239 234;
+  --surface-active-rgb: 227 230 222;
+  --text-primary-rgb: 20 22 26;
+  --text-secondary-rgb: 75 80 88;
+  --text-tertiary-rgb: 134 140 147;
+  --accent-rgb: 91 122 31;
+  --accent-2-rgb: 168 87 26;
   --accent: #5b7a1f;
   --accent-hover: #4a6519;
   --accent-muted: rgba(91, 122, 31, 0.1);
   --accent-glow: rgba(91, 122, 31, 0.18);
+  --accent-2: #a8571a;
+  --accent-2-muted: rgba(168, 87, 26, 0.09);
+  --accent-2-border: rgba(168, 87, 26, 0.22);
   --gradient-start: #5b7a1f;
   --gradient-end: #1e8f6e;
   --grid-line: rgba(10, 12, 10, 0.05);
   --nav-bg: rgba(244, 245, 242, 0.72);
+  --glass-edge: rgba(10, 12, 10, 0.08);
 }
 
 * {
@@ -98,9 +129,123 @@ body {
   background-size: 60px 60px;
 }
 
+/* Same grid, but dissolved toward the edges so it reads as depth rather than
+   as a hard-edged sheet of graph paper. */
+.bg-grid-fade {
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 78% 62% at 50% 38%,
+      #000 0%,
+      rgba(0, 0, 0, 0.45) 55%,
+      transparent 100%);
+  mask-image: radial-gradient(ellipse 78% 62% at 50% 38%,
+      #000 0%,
+      rgba(0, 0, 0, 0.45) 55%,
+      transparent 100%);
+}
+
+/* Slow-drifting colour fields behind the content. */
+@layer components {
+  .aurora {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(110px);
+    pointer-events: none;
+    will-change: transform;
+  }
+}
+
+@keyframes drift-a {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate3d(5%, -7%, 0) scale(1.1);
+  }
+
+  66% {
+    transform: translate3d(-4%, 5%, 0) scale(0.94);
+  }
+}
+
+@keyframes drift-b {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  40% {
+    transform: translate3d(-6%, 6%, 0) scale(1.12);
+  }
+
+  70% {
+    transform: translate3d(4%, -4%, 0) scale(0.96);
+  }
+}
+
+.animate-drift-a {
+  animation: drift-a 22s ease-in-out infinite;
+}
+
+.animate-drift-b {
+  animation: drift-b 28s ease-in-out infinite;
+}
+
 /* Glow effects */
 .glow-accent {
   box-shadow: 0 0 20px var(--accent-glow), 0 0 60px var(--accent-glow);
+}
+
+/* Hairline gradient border — catches "light" on the top-left of a card.
+   Lives in the components layer so positioning utilities (fixed, absolute)
+   still win over the `relative` default; otherwise this silently unpins
+   anything fixed that also wants the edge treatment. */
+@layer components {
+  .glass-edge {
+    position: relative;
+  }
+
+  .glass-edge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(150deg,
+        var(--glass-edge),
+        transparent 42%,
+        transparent 70%,
+        var(--glass-edge));
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* Breathing ring for "live" status dots. */
+@keyframes ping-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.animate-ping-ring {
+  animation: ping-ring 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 .text-gradient {
@@ -125,6 +270,18 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
+}
+
+/* Film grain across the whole viewport — kills gradient banding in the
+   aurora blobs and gives the flat surfaces some tooth. */
+@layer components {
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
 }
 
 /* Reduced motion */

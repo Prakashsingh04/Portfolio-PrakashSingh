@@ -46,7 +46,7 @@ export default function Skills() {
     };
 
     return (
-        <section id="skills" className="py-24 px-6">
+        <section id="skills" className="pt-16 pb-24 px-6">
             <div className="max-w-6xl mx-auto">
                 <SectionHeading
                     code="SKL"

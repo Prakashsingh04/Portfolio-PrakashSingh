@@ -7,7 +7,7 @@ import { Linkedin, Github, Mail, Download } from "lucide-react";
 
 export default function Contact() {
     return (
-        <section id="contact" className="py-24 px-6">
+        <section id="contact" className="pt-16 pb-24 px-6">
             <div className="max-w-3xl mx-auto text-center">
                 <motion.div
                     variants={staggerContainer}

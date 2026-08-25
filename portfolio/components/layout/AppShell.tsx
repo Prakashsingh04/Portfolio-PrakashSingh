@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, ComponentType } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SectionNav from "./SectionNav";
+import BackgroundFX from "./BackgroundFX";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { NavigationContext } from "@/lib/navigation-context";
 import { sections, isSectionId, SectionId } from "@/lib/sections";
@@ -47,6 +48,7 @@ export default function AppShell() {
 
     return (
         <NavigationContext.Provider value={navigate}>
+            <BackgroundFX />
             <SectionNav active={active} onNavigate={navigate} />
 
             {/* Theme control — deliberately kept apart from the nav */}

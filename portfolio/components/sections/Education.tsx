@@ -11,7 +11,7 @@ export default function Education() {
     const latest = education[0].period.slice(-4);
 
     return (
-        <section id="education" className="py-24 px-6">
+        <section id="education" className="pt-16 pb-24 px-6">
             <div className="max-w-4xl mx-auto">
                 <SectionHeading
                     code="EDU"

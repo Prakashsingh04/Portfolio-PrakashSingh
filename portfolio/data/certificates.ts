@@ -4,7 +4,7 @@ export const certifications: Certification[] = [
     {
         title: "AI Foundations",
         issuer: "OpenAI Academy",
-        url: "https://figademy.openai.com/public/certificate/m68bi41zju",
+        url: "https://drive.google.com/file/d/1gpUvW63JGu8KAeVHNMSd0YEEcVUcNgYs/view?usp=sharing",
     },
     {
         title: "AI for Beginners",

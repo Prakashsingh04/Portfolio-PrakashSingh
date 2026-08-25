@@ -1,14 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
     ArrowRight,
-    Briefcase,
+    Download,
     Github,
     GraduationCap,
     Linkedin,
     MapPin,
-    Sparkles,
     Target,
 } from "lucide-react";
 import { profile } from "@/data/profile";
@@ -40,38 +40,22 @@ function MediumIcon({ size = 16 }: { size?: number }) {
     );
 }
 
-/** The old About section, folded in as icon rows instead of prose. */
-const facts = [
-    {
-        icon: Briefcase,
-        label: "Currently",
-        value: current.role,
-        meta: `${current.company} · ${current.period}`,
-    },
-    {
-        icon: Target,
-        label: "Focus",
-        value: "AI Engineering + Backend",
-        meta: "Enterprise AI workflows, APIs, real-time systems",
-    },
-    {
-        icon: GraduationCap,
-        label: "Education",
-        value: "MCA · VIT Vellore",
-        meta: `${mca.period} · ${mca.score} CGPA`,
-    },
-    {
-        icon: MapPin,
-        label: "Based in",
-        value: profile.location,
-        meta: "Working with teams across India",
-    },
-    {
-        icon: Sparkles,
-        label: "Interests",
-        value: "AI · Software · Animation · Anime",
-        meta: "Badminton on the side",
-    },
+/**
+ * What used to be a five-row Profile panel, cut down to the three facts worth
+ * carrying on the card. "Currently" moved onto the photo scrim; interests live
+ * in the Beyond Code section. These render in the amber secondary accent — the
+ * lime stays reserved for the name badge and primary actions.
+ */
+const badges = [
+    { icon: Target, text: "AI Engineering + Backend" },
+    { icon: GraduationCap, text: `MCA · VIT Vellore · ${mca.score}` },
+    { icon: MapPin, text: profile.location },
+];
+
+const socialLinks = [
+    { url: profile.socials[1].url, icon: Github, label: "GitHub" },
+    { url: profile.socials[0].url, icon: Linkedin, label: "LinkedIn" },
+    { url: profile.socials[3].url, icon: MediumIcon, label: "Medium" },
 ];
 
 export default function Hero() {
@@ -80,22 +64,14 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className="relative min-h-screen flex items-center px-6 py-24 md:py-28 overflow-hidden"
+            className="relative lg:min-h-[calc(100svh-4rem)] flex items-center px-6 py-10 lg:py-16"
         >
-            {/* Background Grid */}
-            <div className="absolute inset-0 bg-grid" />
-
-            {/* Gradient Orbs */}
-            <div className="absolute top-1/4 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-[120px] animate-pulse-slow" />
-            <div className="absolute bottom-1/4 -left-32 w-80 h-80 bg-[var(--gradient-end)]/10 rounded-full blur-[100px] animate-pulse-slow" />
-
-            {/* Content */}
             <div className="relative z-10 max-w-6xl mx-auto w-full">
                 <motion.div
                     variants={staggerContainer}
                     initial="hidden"
                     animate="visible"
-                    className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-14 items-start"
+                    className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-14 items-center"
                 >
                     {/* Intro */}
                     <div className="space-y-6">
@@ -132,18 +108,12 @@ export default function Hero() {
                             {profile.headline}
                         </motion.p>
 
-                        {/* Description + bio */}
+                        {/* Description */}
                         <motion.p
                             variants={staggerItem}
                             className="text-lg text-text-secondary max-w-2xl leading-relaxed"
                         >
                             {profile.description}
-                        </motion.p>
-                        <motion.p
-                            variants={staggerItem}
-                            className="text-base text-text-tertiary max-w-2xl leading-relaxed"
-                        >
-                            {profile.bio}
                         </motion.p>
 
                         {/* CTAs */}
@@ -153,7 +123,7 @@ export default function Hero() {
                         >
                             <button
                                 onClick={() => navigate("projects")}
-                                className="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-background text-sm font-semibold rounded-lg hover:bg-[var(--accent-hover)] transition-all duration-200 hover:shadow-lg hover:shadow-accent/20"
+                                className="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-background text-sm font-semibold rounded-xl hover:bg-[var(--accent-hover)] transition-all duration-200 hover:shadow-lg hover:shadow-[var(--accent-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]"
                             >
                                 View My Work
                                 <ArrowRight
@@ -161,76 +131,101 @@ export default function Hero() {
                                     className="group-hover:translate-x-0.5 transition-transform"
                                 />
                             </button>
-                            <a
-                                href={profile.socials[1].url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--border)] text-text-secondary text-sm font-medium rounded-lg hover:border-[var(--border-hover)] hover:text-text-primary transition-all duration-200"
-                            >
-                                <Github size={16} />
-                                GitHub
-                            </a>
-                            <a
-                                href={profile.socials[0].url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--border)] text-text-secondary text-sm font-medium rounded-lg hover:border-[var(--border-hover)] hover:text-text-primary transition-all duration-200"
-                            >
-                                <Linkedin size={16} />
-                                LinkedIn
-                            </a>
-                            <a
-                                href={profile.socials[3].url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 border border-[var(--border)] text-text-secondary text-sm font-medium rounded-lg hover:border-[var(--border-hover)] hover:text-text-primary transition-all duration-200"
-                            >
-                                <MediumIcon size={16} />
-                                Medium
-                            </a>
+
+                            {socialLinks.map(({ url, icon: Icon, label }) => (
+                                <a
+                                    key={label}
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-5 py-3 border border-[var(--border)] bg-surface/40 backdrop-blur-sm text-text-secondary text-sm font-medium rounded-xl hover:border-[var(--border-hover)] hover:text-text-primary hover:bg-surface-hover/60 hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+                                >
+                                    <Icon size={16} />
+                                    {label}
+                                </a>
+                            ))}
                         </motion.div>
                     </div>
 
-                    {/* Profile panel — the old About metadata, as icon rows */}
+                    {/* Profile card — photo, key facts as badges, resume */}
                     <motion.aside
                         variants={fadeUp}
-                        className="rounded-2xl border border-[var(--border)] bg-surface/80 backdrop-blur-sm overflow-hidden"
+                        className="glass-edge relative mx-auto w-full max-w-sm lg:max-w-[380px] lg:justify-self-end rounded-2xl border border-[var(--border)] bg-surface/70 backdrop-blur-xl shadow-2xl shadow-black/25 overflow-hidden"
                     >
-                        <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border)] bg-surface-hover/60">
-                            <span className="font-mono text-[11px] tracking-[0.2em] text-text-tertiary uppercase">
-                                Profile
+                        {/* Window chrome + live location */}
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)] bg-surface-hover/40">
+                            <span className="flex items-center gap-1.5">
+                                <span className="w-2.5 h-2.5 rounded-full bg-accent/80" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-text-tertiary/25" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-text-tertiary/25" />
                             </span>
                             <span className="flex items-center gap-1.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                                <span className="font-mono text-[11px] text-accent uppercase tracking-wider">
+                                <span className="relative flex h-1.5 w-1.5">
+                                    <span className="absolute inset-0 rounded-full bg-accent animate-ping-ring" />
+                                    <span className="relative h-1.5 w-1.5 rounded-full bg-accent" />
+                                </span>
+                                <span className="font-mono text-[10px] text-accent uppercase tracking-[0.18em]">
                                     {profile.location.split(",")[0]}
                                 </span>
                             </span>
                         </div>
 
-                        <ul className="divide-y divide-[var(--border)]">
-                            {facts.map((fact) => (
-                                <li
-                                    key={fact.label}
-                                    className="group flex items-start gap-4 px-5 py-4 hover:bg-surface-hover/50 transition-colors duration-200"
-                                >
-                                    <span className="mt-0.5 p-2 rounded-lg bg-accent-muted text-accent shrink-0">
-                                        <fact.icon size={15} />
+                        <div className="p-4 space-y-4">
+                            {/* Identity badge — the only lime badge on the card */}
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-muted border border-accent/25 text-accent text-[11px] font-mono uppercase tracking-[0.14em]">
+                                <span className="w-1 h-1 rounded-full bg-accent" />
+                                {profile.name}
+                            </span>
+
+                            {/* Photo with the current role on a scrim */}
+                            <div className="group relative w-full aspect-[4/5] max-h-[42svh] rounded-xl overflow-hidden border border-[var(--border)] bg-surface-hover">
+                                <Image
+                                    src="/photo/ZAI.png"
+                                    alt={profile.name}
+                                    fill
+                                    priority
+                                    sizes="(min-width: 1024px) 380px, 70vw"
+                                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                                />
+                                <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                                        Currently
+                                    </p>
+                                    <p className="text-sm font-semibold text-white mt-1 leading-snug">
+                                        {current.role}
+                                    </p>
+                                    <p className="text-xs text-white/60 mt-0.5">
+                                        {current.company} · {current.period}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Key facts, as amber badges */}
+                            <div className="flex flex-wrap gap-2">
+                                {badges.map((badge) => (
+                                    <span
+                                        key={badge.text}
+                                        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-accent-2-muted border border-accent-2-border text-accent-2 text-[11px] font-medium"
+                                    >
+                                        <badge.icon size={12} strokeWidth={2.2} />
+                                        {badge.text}
                                     </span>
-                                    <span className="min-w-0">
-                                        <span className="block font-mono text-[10px] tracking-[0.18em] text-text-tertiary uppercase">
-                                            {fact.label}
-                                        </span>
-                                        <span className="block text-sm font-medium text-text-primary mt-1">
-                                            {fact.value}
-                                        </span>
-                                        <span className="block text-xs text-text-tertiary mt-0.5">
-                                            {fact.meta}
-                                        </span>
-                                    </span>
-                                </li>
-                            ))}
-                        </ul>
+                                ))}
+                            </div>
+
+                            {/* Resume download */}
+                            <a
+                                href={profile.resumeUrl}
+                                download
+                                className="group w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-accent text-background text-sm font-semibold rounded-xl hover:bg-[var(--accent-hover)] transition-all duration-200 hover:shadow-lg hover:shadow-[var(--accent-glow)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)]"
+                            >
+                                <Download
+                                    size={15}
+                                    className="group-hover:translate-y-0.5 transition-transform"
+                                />
+                                Download Resume
+                            </a>
+                        </div>
                     </motion.aside>
                 </motion.div>
             </div>

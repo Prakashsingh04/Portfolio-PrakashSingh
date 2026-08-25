@@ -30,7 +30,7 @@ const interests = [
 
 export default function BeyondCode() {
     return (
-        <section className="py-24 px-6">
+        <section className="pt-16 pb-24 px-6">
             <div className="max-w-6xl mx-auto">
                 <SectionHeading
                     code="BYD"
